@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CharPrinter {
-    private static volatile char flag;
+    private static char flag;
     private final Map<Character, Character> map = new HashMap<>();
     private final String s;
 
