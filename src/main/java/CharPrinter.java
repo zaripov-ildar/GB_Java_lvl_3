@@ -2,17 +2,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CharPrinter {
-    private static volatile char flag = 'C';
+    private static volatile char flag;
     private final Map<Character, Character> map = new HashMap<>();
+    private final String s;
 
-    {
-        map.put('A', 'B');
-        map.put('B', 'C');
-        map.put('C', 'A');
+    public CharPrinter(String s) {
+        this.s = s;
+        int lastIndex = s.length() - 1;
+        this.setFlag(s.charAt(lastIndex));
+        for (int i = 0; i < lastIndex; i++) {
+            map.put(s.charAt(i), s.charAt(i + 1));
+        }
+        map.put(s.charAt(lastIndex), s.charAt(0));
+
     }
 
-    public synchronized void printChar(char c) {
-        for (int i = 0; i < 5; i++) {
+    private synchronized void printChar(char c, int repetitions) {
+        for (int i = 0; i < repetitions; i++) {
             while (!isMyTurn(c)) {
                 try {
                     wait();
@@ -21,6 +27,9 @@ public class CharPrinter {
                 }
             }
             System.out.println(c);
+            if (s.charAt(s.length()-1) == c){
+                System.out.println();
+            }
             setFlag(c);
             notifyAll();
         }
@@ -30,7 +39,13 @@ public class CharPrinter {
         flag = c;
     }
 
-    private boolean isMyTurn(char sign) {
-        return map.get(flag) == sign;
+    private boolean isMyTurn(char c) {
+        return map.get(flag) == c;
+    }
+
+    public void startThreadForEachChar(int repetitions) {
+        for (Character value : map.values()) {
+            (new Thread(() -> printChar(value, repetitions))).start();
+        }
     }
 }
