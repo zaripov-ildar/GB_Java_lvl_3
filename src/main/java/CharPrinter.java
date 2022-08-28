@@ -8,32 +8,44 @@ public class CharPrinter {
 
     public CharPrinter(String s) {
         this.s = s;
-        int lastIndex = s.length() - 1;
-        this.setFlag(s.charAt(lastIndex));
-        for (int i = 0; i < lastIndex; i++) {
+        this.setFlag(s.charAt(s.length() - 1));
+        initiateMap();
+
+    }
+
+    private void initiateMap() {
+        for (int i = 0; i < s.length() - 1; i++) {
             map.put(s.charAt(i), s.charAt(i + 1));
         }
-        map.put(s.charAt(lastIndex), s.charAt(0));
-
+        map.put(s.charAt(s.length() - 1), s.charAt(0));
     }
 
-    private synchronized void printChar(char c, int repetitions) {
-        for (int i = 0; i < repetitions; i++) {
-            while (!isMyTurn(c)) {
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+
+    private synchronized void checkTurnAndPrint(char c) {
+        checkTurn(c);
+        printChar(c);
+        setFlag(c);
+        notifyAll();
+    }
+
+    private void checkTurn(char c){
+        while (!isMyTurn(c)) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-            System.out.println(c);
-            if (s.charAt(s.length()-1) == c){
-                System.out.println();
-            }
-            setFlag(c);
-            notifyAll();
         }
     }
+
+    private void printChar(char c){
+        System.out.print(c);
+        if (s.charAt(s.length() - 1) == c) {
+            System.out.print(" ");
+        }
+
+    }
+
 
     private void setFlag(char c) {
         flag = c;
@@ -45,7 +57,9 @@ public class CharPrinter {
 
     public void startThreadForEachChar(int repetitions) {
         for (Character value : map.values()) {
-            (new Thread(() -> printChar(value, repetitions))).start();
+            for (int i = 0; i < repetitions; i++) {
+                (new Thread(() -> checkTurnAndPrint(value))).start();
+            }
         }
     }
 }
