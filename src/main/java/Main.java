@@ -24,7 +24,7 @@ public class Main {
     }
 
     private static Class[] getTestedClassList() {
-        File dir = new File("src/main/java/ClassesForTesting");
+        File dir = new File("src/main/java/lesson_7/classesForTesting");
         File[] arrFiles = dir.listFiles();
         if (arrFiles == null) {
             throw new RuntimeException("Couldn't find files");
@@ -32,7 +32,7 @@ public class Main {
         Class[] classes = new Class[arrFiles.length];
 
         for (int i = 0; i < arrFiles.length; i++) {
-            String className = "ClassesForTesting." + (arrFiles[i].getName()).split("\\.")[0];
+            String className = "lesson_7.classesForTesting." + (arrFiles[i].getName()).split("\\.")[0];
             try {
                 classes[i] = Class.forName(className);
             } catch (ClassNotFoundException e) {

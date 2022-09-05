@@ -1,7 +1,7 @@
-import Annotations.AfterSuite;
-import Annotations.BeforeSuite;
-import Annotations.Test;
-import ClassesForTesting.TestClass;
+import lesson_7.Annotations.AfterSuite;
+import lesson_7.Annotations.BeforeSuite;
+import lesson_7.Annotations.Test;
+import lesson_7.classesForTesting.TestClass;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -48,9 +48,9 @@ public class Tester {
             }
         }
         if (!(beforeAnnotations == 1 && afterAnnotations == 1)) {
-            throw new RuntimeException("Every of annotations @AfterSuite and @BeforeSuite have to be represented only one time!\n" +
-                    "\t@AfterSuite: " + afterAnnotations + ";\n" +
-                    "\t@BeforeSuite: " + beforeAnnotations);
+            throw new RuntimeException("Every of annotations @lesson_7.Annotations.AfterSuite and @lesson_7.Annotations.BeforeSuite have to be represented only one time!\n" +
+                    "\t@lesson_7.Annotations.AfterSuite: " + afterAnnotations + ";\n" +
+                    "\t@lesson_7.Annotations.BeforeSuite: " + beforeAnnotations);
         }
     }
 }

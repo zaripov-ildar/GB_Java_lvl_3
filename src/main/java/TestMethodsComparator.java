@@ -1,6 +1,6 @@
-import Annotations.AfterSuite;
-import Annotations.BeforeSuite;
-import Annotations.Test;
+import lesson_7.Annotations.AfterSuite;
+import lesson_7.Annotations.BeforeSuite;
+import lesson_7.Annotations.Test;
 
 import java.lang.reflect.Method;
 import java.util.Comparator;
@@ -15,8 +15,8 @@ public class TestMethodsComparator implements Comparator<Method> {
     }
 
     private int getMethodPriority(Method method) {
-        int AFTER_SUITE_PRIORITY = 0;
-        int BEFORE_SUITE_PRIORITY = 11;
+        int AFTER_SUITE_PRIORITY = 11;
+        int BEFORE_SUITE_PRIORITY = 0;
         if (method.getAnnotation(AfterSuite.class) != null) {
             return AFTER_SUITE_PRIORITY;
         } else if (method.getAnnotation(BeforeSuite.class) != null) {

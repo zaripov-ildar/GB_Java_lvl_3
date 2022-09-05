@@ -1,7 +1,6 @@
-package ClassesForTesting;
+package lesson_7.classesForTesting;
 
-import Annotations.AfterSuite;
-import Annotations.Test;
+import lesson_7.Annotations.AfterSuite;
 
 public class WithoutBefore {
     @AfterSuite

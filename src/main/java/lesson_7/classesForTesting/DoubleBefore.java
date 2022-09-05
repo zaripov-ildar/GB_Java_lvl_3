@@ -1,7 +1,6 @@
-package ClassesForTesting;
+package lesson_7.classesForTesting;
 
-import Annotations.BeforeSuite;
-import Annotations.Test;
+import lesson_7.Annotations.BeforeSuite;
 
 public class DoubleBefore {
     @BeforeSuite

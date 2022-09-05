@@ -1,6 +1,6 @@
-package ClassesForTesting;
+package lesson_7.classesForTesting;
 
-import Annotations.*;
+import lesson_7.Annotations.*;
 
 public class TestClass {
     @BeforeSuite
