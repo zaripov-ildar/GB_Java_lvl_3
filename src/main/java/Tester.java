@@ -25,6 +25,16 @@ public class Tester {
         }
     }
 
+    public void start(String className) {
+        Class testClass;
+        try {
+            testClass = Class.forName(className);
+            start(testClass);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     private List<Method> getSortedMethodList(Method[] methods) {
         List<Method> methodList = new ArrayList<>(List.of(methods));
         methodList = methodList.stream()
